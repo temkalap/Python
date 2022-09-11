@@ -8,7 +8,7 @@ lstx = ['{}x^{}'.format(lst[x], x) for x in range(0, k + 1)]
 lstx.reverse()
 sting = '+'.join(lstx) + '=0'
 
-myfile = open("multipl2.txt", "w+")
+myfile = open("multipl1.txt", "w+")
 myfile.write(sting)
 myfile.close()
 print(sting)
