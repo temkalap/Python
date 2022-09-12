@@ -1,32 +1,51 @@
 # Даны два файла в каждом из которых находится запись многочлена. Сформировать файл содержащий сумму многочленов.
-def get_sum(str1,str2):
-    lst1=get_parsed_list(str1)
-    lst2=get_parsed_list(str2)
-    max_size=max(len(lst1),len(lst2))
+def get_sum(str1, str2):
+    lst1 = get_parsed_list(str1)
+    lst2 = get_parsed_list(str2)
+    result_list = []
+    max_size = max(len(lst1), len(lst2))
+    min_size = min(len(lst1), len(lst2))
+    t=list(range(0,max_size))
+    r=list(range(max_size, 0,-1))
+    for i in range(max_size, 0,-1):
+        j = max_size - min_size
+        if len(lst1) == max_size:
+            if lst1[i][1] == lst2[i][1]:
+                result_list.append((lst1[i][0] + lst2[i][0], lst1[i][1]))
+            else:
+                result_list.append(lst1[i])
+        else:
+            if lst1[i][1] == lst2[i][1]:
+                result_list.append((lst1[i][0] + lst2[i][0], lst1[i][1]))
+            else:
+                result_list.append(lst2[i])
+    return result_list
 
-    for i in range (0,max_size):
-        if len(lst1)==max_size
 
 def get_parsed_list(string):
     result_list = []
     lst = str(string).split('+')
     for item in lst:
-        item_l = tuple(item.split('x^'))
+        item_l = item.split('x^')
+        for i in range(0,len(item_l)):
+            item_l[i]=int(item_l[i])
         result_list.append(item_l)
     return normalise(result_list)
 
 
 def normalise(lst):
     result_list = []
-    for i in range(0,len(lst)+1):
+    for i in range(0, len(lst)):
 
-        if i==len(lst)+1:
-            continue
-        if lst[i][2]==lst[i+1][2]+1:
+        if i == len(lst)-1:
+            result_list.append(lst[i])
+            break
+        if lst[i][1] == lst[i + 1][1] + 1:
             result_list.append(lst[i])
         else:
-            result_list.append((0,lst[i][2]-1))
-    return  result_list
+            result_list.append((0, lst[i][1] - 1))
+    return result_list
+
 
 str1 = ''
 str2 = ''
@@ -35,5 +54,5 @@ with open('multipl1.txt', 'r') as file:
 with open('multipl2.txt', 'r') as file:
     str2 = file.read()
 
-print(str1)
-print(str2)
+lst = get_sum(str1, str2)
+print(lst)
