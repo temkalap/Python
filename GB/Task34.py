@@ -45,6 +45,8 @@ def normalise(lst):
     return result_list
 
 
+
+
 str1 = ''
 str2 = ''
 with open('multipl1.txt', 'r') as file:
