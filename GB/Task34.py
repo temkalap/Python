@@ -5,7 +5,7 @@ def get_sum(str1, str2):
     result_list = []
     max_size = max(len(lst1), len(lst2))
     min_size = min(len(lst1), len(lst2))
-    for i in range(max_size - 1, 0, -1):
+    for i in range(0, max_size):
         j = max_size - min_size
         if len(lst1) == max_size:
             if lst1[i][1] == lst2[i][1]:
@@ -41,10 +41,17 @@ def normalise(lst):
         if lst[i][1] == lst[i + 1][1] + 1:
             result_list.append(lst[i])
         else:
+            result_list.append(lst[i])
             result_list.append([0, lst[i][1] - 1])
     return result_list
 
 
+def get_str_by_list(lst: list):
+    result_str = ''
+    for item in lst:
+        result_str = result_str + '+' + str(item[0]) + '^' + str(item[1])
+    result_str = result_str + '=0'
+    return result_str
 
 
 str1 = ''
@@ -55,4 +62,8 @@ with open('multipl2.txt', 'r') as file:
     str2 = file.read().replace('=0', '')
 
 lst = get_sum(str1, str2)
-print(lst)
+result = str(get_str_by_list(lst))
+myfile = open("multipl_result.txt", "w+")
+myfile.write(result)
+myfile.close()
+print(result)
